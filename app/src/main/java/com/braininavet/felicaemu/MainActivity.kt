@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
@@ -13,7 +11,6 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.*
-import com.braininavet.felicaemu.theme.WearAppTheme
 import androidx.wear.compose.material.Icon
 
 class MainActivity : ComponentActivity() {
@@ -28,26 +25,28 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun WearApp() {
-    WearAppTheme {
-        val listState = rememberScalingLazyListState()
+    MaterialTheme {
         val contentModifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 8.dp)
 
-        ScalingLazyColumn(
+        Column(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(
-                top = 32.dp,
-                start = 8.dp,
-                end = 8.dp,
-                bottom = 32.dp
-            ),
-            verticalArrangement = Arrangement.Center,
-            state = listState
+            verticalArrangement = Arrangement.Center
         ) {
-            item { EmulatorSwitch(contentModifier) }
-            item { EmulatorSwitch(contentModifier) }
-            item { EmulatorSwitch(contentModifier) }
+            EmulatorSwitch(contentModifier)
+            Chip(
+                modifier = contentModifier,
+                label = {
+                    Text(
+                        text = "Settings",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                colors = ChipDefaults.chipColors(backgroundColor = MaterialTheme.colors.onPrimary),
+                onClick = {}
+            )
         }
     }
 }
@@ -72,7 +71,7 @@ fun EmulatorSwitch(modifier: Modifier) {
         },
         label = {
             Text(
-                text = "FeliCa Emulation",
+                text = "Emulation",
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
