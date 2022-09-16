@@ -76,7 +76,7 @@ dependencies {
 
     // If you are using Compose Navigation, use the Wear OS version (NOT the
     // androidx.navigation:navigation-compose version), that is, uncomment the line below.
-    // implementation libs.wear.compose.navigation
+    implementation libs.wear.compose.navigation
 
     // Testing
     testImplementation libs.junit
