@@ -5,12 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.*
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
@@ -31,6 +34,7 @@ class MainActivity : ComponentActivity() {
 fun WearApp() {
     MaterialTheme {
         val navController = rememberSwipeDismissableNavController()
+        val cardList = remember { mutableStateListOf<String>() }
         val contentModifier = Modifier
             .fillMaxWidth()
 
@@ -39,37 +43,76 @@ fun WearApp() {
             startDestination = "home"
         ) {
             composable("home") {
-                Main(contentModifier)
+                Main(contentModifier, cardList)
+            }
+            composable("add_card") {
+                AddCard()
             }
         }
     }
 }
 
 @Composable
-fun Main(modifier: Modifier) {
+fun Main(
+    modifier: Modifier,
+    cardList: SnapshotStateList<String>
+) {
     ScalingLazyColumn(
         modifier = Modifier.fillMaxWidth(),
         anchorType = ScalingLazyListAnchorType.ItemCenter,
         content = {
             item {
                 ListHeader {
-                    Button(
-                        modifier = Modifier.size(ButtonDefaults.ExtraSmallButtonSize),
-                        onClick = {}
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_baseline_add_24),
-                            contentDescription = "Add",
-                            modifier = Modifier
-                                .size(ButtonDefaults.SmallIconSize)
-                                .wrapContentSize(align = Alignment.Center)
-                        )
-                    }
+                    Text("Cards")
                 }
             }
-            items(10) { EmulatorSwitch(modifier) }
+            if (cardList.size == 0) {
+                item {
+                    Chip(
+                        modifier = modifier,
+                        colors = ChipDefaults.chipColors(MaterialTheme.colors.surface),
+                        onClick = {},
+                        label = {
+                            Text(
+                                text = "No cards",
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                color = Color.LightGray
+                            )
+                        }
+                    )
+                }
+            } else {
+                itemsIndexed(cardList) { _, _ ->
+                    EmulatorSwitch(modifier)
+                }
+            }
+            item {
+                Spacer(Modifier.size(0.dp, 8.dp))
+            }
+            item {
+                Button(
+                    modifier = Modifier.size(ButtonDefaults.DefaultButtonSize),
+                    onClick = {
+                        cardList.add("Card sample")
+                    }
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_baseline_add_24),
+                        contentDescription = "Add",
+                        modifier = Modifier
+                            .size(ButtonDefaults.DefaultIconSize)
+                            .wrapContentSize(align = Alignment.Center)
+                    )
+                }
+            }
         }
     )
+}
+
+@Composable
+fun AddCard() {
+
 }
 
 @Composable
