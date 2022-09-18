@@ -6,6 +6,7 @@ androidx-test = "1.4.0"
 androidx-wear-compose = "1.0.2"
 androidx-wear-tiles = "1.0.1"
 androidx-wear-watchface = "1.0.1"
+androidx-datastore = "1.0.0"
 compose = "1.2.1"
 compose-compiler = "1.2.0"
 ktlint = "0.46.1"
@@ -15,6 +16,7 @@ org-jetbrains-kotlinx = "1.6.0"
 [libraries]
 android-lint-gradle = "com.android.tools.lint:lint-gradle:30.2.2"
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "androidx.datastore" }
 compose-compiler = "androidx.compose.compiler:compiler:1.2.0"
 compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }

@@ -64,6 +64,8 @@ dependencies {
     implementation libs.androidx.activity.compose
     implementation libs.compose.ui.tooling.preview
 
+    implementation libs.androidx.datastore
+
     // Compose for Wear OS Dependencies
     // NOTE: DO NOT INCLUDE a dependency on androidx.compose.material:material.
     // androidx.wear.compose:compose-material is designed as a replacement not an addition to

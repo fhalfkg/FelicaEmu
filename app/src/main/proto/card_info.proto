@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "com.braininavet.felicaemu";
+option java_multiple_files = true;
+
+message Card {
+  string cardName = 1;
+  string cardNumber = 2;
+}

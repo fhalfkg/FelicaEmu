@@ -1,7 +1,6 @@
 package com.braininavet.felicaemu.converter
 
 import java.io.UnsupportedEncodingException
-import java.util.*
 import kotlin.experimental.xor
 
 class A {
@@ -22,8 +21,8 @@ class A {
             throw RuntimeException("Invalid UID length")
         }
         return when {
-            arg11.uppercase(Locale.ROOT).startsWith("E004") -> toKonamiID(arg11, 1.toByte())
-            arg11.uppercase(Locale.ROOT).startsWith("0") -> toKonamiID(arg11, 2.toByte())
+            arg11.uppercase().startsWith("E004") -> toKonamiID(arg11, 1.toByte())
+            arg11.uppercase().startsWith("0") -> toKonamiID(arg11, 2.toByte())
             else -> throw RuntimeException("Invalid UID prefix")
         }
     }
